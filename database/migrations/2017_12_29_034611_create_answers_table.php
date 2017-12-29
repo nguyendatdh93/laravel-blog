@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('content');
-            $table->tinyInteger('is_published');
+            $table->integer('survey_id');
+            $table->integer('status');
+            $table->string('user_agent');
+            $table->dateTime('started_at');
+            $table->dateTime('finished_at');
+            $table->tinyInteger('del_flg');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('answers');
     }
 }
